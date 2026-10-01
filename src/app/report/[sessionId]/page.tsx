@@ -102,32 +102,37 @@ export default function ReportPage({
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <header className="top-header" style={{ padding: '0 2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <header className="top-header">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Link href="/dashboard" className="btn-back">
-            <span className="back-arrow">←</span> Dashboard
+            <span className="back-arrow">←</span>
+            <span className="report-back-label">Dashboard</span>
           </Link>
           <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>/</span>
           <Link href="/reports" className="btn-back">
             Reports
           </Link>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <ThemeToggle />
-          <div className="btn btn-secondary btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>↓</span> Download PDF
-          </div>
+          <button
+            onClick={() => window.print()}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}
+          >
+            <span>↓</span> <span className="btn-pdf-label">PDF</span>
+          </button>
         </div>
       </header>
 
-      <main style={{ flex: 1, padding: '3rem 2rem', background: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <main style={{ flex: 1, padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)', background: 'var(--bg-primary)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%' }}>
           
-          <div style={{ marginBottom: '2rem' }}>
-            <h1 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h1 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', marginBottom: '0.35rem' }}>
               {user.jobRole} Interview
             </h1>
-            <p style={{ color: 'var(--text-secondary)' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
               {new Date(session.startedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • {typeInfo.label}
             </p>
           </div>
@@ -212,7 +217,7 @@ export default function ReportPage({
                 
                 <div className="card">
                   <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Performance Breakdown</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                  <div className="breakdown-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span>Communication:</span> <strong style={{ color: 'var(--text-primary)' }}>{session.feedback.communicationScore}%</strong>
                     </div>

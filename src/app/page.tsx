@@ -131,7 +131,7 @@ export default function Home() {
           {/* hero-grid: 2-col on desktop, 1-col on mobile */}
           <div className="hero-grid">
             {/* Left: Copy */}
-            <div className="hero-copy" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div className="hero-copy">
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.3rem 0.85rem', borderRadius: '999px',
@@ -152,12 +152,12 @@ export default function Home() {
                 Have a real voice conversation with Alex, your AI interviewer. Get instant, detailed feedback on exactly what to improve before the real thing.
               </p>
 
-              <div className="hero-cta-row" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div className="hero-cta-row">
                 <Link href="/signup" className="btn btn-primary btn-lg">Start practicing free</Link>
                 <Link href="/login" className="btn btn-secondary btn-lg">Sign in</Link>
               </div>
 
-              <div className="hero-social-proof" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="hero-social-proof">
                 <div style={{ display: 'flex' }}>
                   {['#e8c9a0', '#a8c8d8', '#a8c8a8', '#d8c0c0'].map((bg, i) => (
                     <div key={i} style={{ width: 26, height: 26, borderRadius: '50%', background: bg, border: '2px solid var(--bg-primary)', marginLeft: i > 0 ? -7 : 0 }} />
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
 
             {/* Right: Alex photo */}
-            <div className="hero-photo-wrapper" style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div className="hero-photo-wrapper">
               <div className="hero-photo-card">
                 <Image
                   src="/Alex.png"
@@ -190,11 +190,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Floating bubble — hidden on mobile */}
-              <div
-                className="hero-bubble"
-                style={{ position: 'absolute', bottom: 70, left: -40, background: 'var(--bg-card)', border: '1px solid var(--border-card)', borderRadius: 12, padding: '0.75rem 1rem', boxShadow: 'var(--shadow-md)', maxWidth: 220 }}
-              >
+              {/* Floating bubble — hidden on mobile via CSS */}
+              <div className="hero-bubble">
                 <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--accent-primary)', marginBottom: '0.3rem' }}>Alex</div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                   Tell me about a challenging project you&apos;ve led.

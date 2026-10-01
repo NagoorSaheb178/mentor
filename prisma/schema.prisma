@@ -3,13 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id              String    @id @default(cuid())
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
   email           String    @unique
   password        String
   name            String
@@ -21,8 +20,8 @@ model User {
 }
 
 model Session {
-  id            String    @id @default(cuid())
-  userId        String
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @db.ObjectId
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   interviewType String
   status        String    @default("active")
@@ -35,17 +34,18 @@ model Session {
 }
 
 model Feedback {
-  id                String   @id @default(cuid())
-  sessionId         String   @unique
-  session           Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  overallScore      Float
-  communicationScore Float
-  technicalScore    Float
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId           String   @unique @db.ObjectId
+  session             Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  overallScore        Float
+  communicationScore  Float
+  technicalScore      Float
   problemSolvingScore Float
-  confidenceScore   Float
-  strengths         Json
-  weaknesses        Json
-  recommendations   Json
-  questionBreakdown Json
-  createdAt         DateTime @default(now())
+  confidenceScore     Float
+  strengths           Json
+  weaknesses          Json
+  recommendations     Json
+  questionBreakdown   Json
+  createdAt           DateTime @default(now())
 }
+

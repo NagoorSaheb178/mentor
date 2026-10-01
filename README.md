@@ -1,6 +1,6 @@
 # Mentor AI - Mock Interview Platform
 
-A full-stack AI-powered mock interview platform where candidates have a real, dynamic voice conversation with an AI interviewer. Built with Next.js, PostgreSQL, and Vapi.
+A full-stack AI-powered mock interview platform where candidates have a real, dynamic voice conversation with an AI interviewer. Built with Next.js, MongoDB, and Vapi.
 
 ## Features
 - **Custom JWT Authentication**: Simple email/password sign up with profile details (Job Role, Experience Level).
@@ -12,7 +12,7 @@ A full-stack AI-powered mock interview platform where candidates have a real, dy
 
 ## Tech Stack
 - **Frontend & Backend**: Next.js (App Router, API Routes)
-- **Database**: PostgreSQL (via Prisma ORM)
+- **Database**: MongoDB (via Prisma ORM)
 - **Voice AI**: Vapi.ai (Managed Voice Layer)
 - **AI Graph Routing**: `@langchain/langgraph` (Bonus Feature)
 - **Evaluation Engine**: Puter.js (GPT-4o-mini, powering LangGraph nodes)
@@ -29,7 +29,8 @@ npm install
 Create a `.env` file in the root directory and add the following:
 ```env
 # Database
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mentor"
+DATABASE_URL="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/mentor?retryWrites=true&w=majority"
+
 
 # JWT Secret for Auth
 JWT_SECRET="your_super_secret_jwt_key_123"

@@ -67,6 +67,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -77,6 +79,8 @@ body {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s, color 0.3s;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 a {
@@ -839,99 +843,224 @@ select.form-input {
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — Mobile First
-   Breakpoints: 768px (tablet), 480px (phone)
+   RESPONSIVE DESIGN SYSTEM — Mobile First
+   Breakpoints: 860px (tablet), 640px (phone), 480px (small phone)
 ═══════════════════════════════════════════ */
 
-/* ─── Dashboard / App Layout ─── */
-@media (max-width: 768px) {
-
-  /* Sidebar → horizontal bottom nav */
-  .app-layout {
-    flex-direction: column;
-    padding-bottom: 64px; /* room for bottom nav */
-  }
-
-  .sidebar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 64px;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 0.5rem;
-    border-right: none;
-    border-top: 1px solid var(--border-card);
-    z-index: 40;
-    background: var(--bg-sidebar);
-    gap: 0;
-    overflow-x: auto;
-  }
-
-  /* Hide logo and logout in sidebar on mobile */
-  .sidebar .navbar-logo,
-  .sidebar > div:last-child {
-    display: none;
-  }
-
-  .sidebar-nav {
-    flex-direction: row;
-    margin-top: 0;
-    gap: 0;
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  .sidebar-link {
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.5rem 0.6rem;
-    font-size: 0.68rem;
-    border-radius: 8px;
-    text-align: center;
-    flex: 1;
-    min-width: 0;
-  }
-
-  /* Shrink emoji/icon in sidebar links */
-  .sidebar-link span:first-child {
-    font-size: 1.1rem;
-  }
-
-  .main-content {
-    min-height: calc(100vh - 64px);
-  }
-
-  /* Top header compact */
-  .top-header {
-    height: 54px;
-    padding: 0 1rem;
-  }
-
-  /* Page content padding */
-  .main-content > div[style] {
-    padding: 1.5rem 1rem !important;
-  }
+/* ─── Base Page Container Utilities ─── */
+.page-body-container {
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* ─── Homepage Navbar ─── */
-@media (max-width: 768px) {
-  .home-nav-links {
-    display: none;
-  }
-
-  .navbar {
-    padding: 1rem 0;
-  }
-
-  .navbar-cta-group {
-    gap: 0.4rem;
-  }
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
-/* ─── Homepage Hero ─── */
+.top-header-brand {
+  display: none;
+}
+
+/* ─── Stats Grid ─── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.stats-row-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-card {
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* ─── Session List Items ─── */
+.session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.session-row:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--accent-primary);
+}
+
+.session-main {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.session-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent-secondary);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.session-info {
+  min-width: 0;
+}
+
+.session-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-date {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.session-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.session-status {
+  min-width: 75px;
+  text-align: center;
+}
+
+.session-score {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.session-action {
+  text-align: right;
+}
+
+.session-link {
+  color: var(--accent-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ─── Reports Charts Grid ─── */
+.reports-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ─── Setup Wizard Steps ─── */
+.wizard-steps-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 460px;
+}
+
+.wizard-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.wizard-step-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.wizard-connector {
+  flex: 1;
+  max-width: 50px;
+  min-width: 16px;
+  height: 2px;
+  background: var(--border-card);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── 2-Column Responsive Form Grids ─── */
+.setup-grid-2col,
+.signup-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* ─── Settings Styles ─── */
+.settings-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+}
+
+.theme-toggle-group {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.btn-theme-choice {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-theme-choice.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* ─── Tablet & Smaller Breakpoint (<= 860px) ─── */
 @media (max-width: 860px) {
   .hero-grid {
     grid-template-columns: 1fr !important;
@@ -945,12 +1074,12 @@ select.form-input {
   }
 
   .hero-grid .hero-photo-card {
-    max-width: 300px !important;
+    max-width: 320px !important;
     width: 100% !important;
   }
 
   .hero-bubble {
-    display: none !important; /* hide floating bubble on mobile */
+    display: none !important;
   }
 
   .hero-copy {
@@ -964,97 +1093,216 @@ select.form-input {
   .hero-social-proof {
     justify-content: center;
   }
-}
 
-/* ─── Homepage Sections ─── */
-@media (max-width: 768px) {
-  .hero-section   { padding: 3rem 0 2.5rem; }
-  .features-section,
-  .how-section,
-  .testimonials-section,
-  .cta-section    { padding: 3rem 0; }
-
-  .section-title  { font-size: 1.6rem; }
-
-  /* How it works: stack columns */
   .how-grid {
     grid-template-columns: 1fr !important;
     gap: 2.5rem !important;
   }
 
-  /* Feature grid: 1 column */
-  .features-grid {
-    grid-template-columns: 1fr !important;
+  .stats-row-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Testimonials: 1 column */
+  .reports-charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Mobile App Shell (<= 768px) ─── */
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  .app-layout {
+    flex-direction: column;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    min-height: 100vh;
+  }
+
+  .main-content {
+    min-height: auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Top header on mobile */
+  .top-header {
+    height: 56px;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .top-header-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  /* Sidebar transforms into bottom navigation bar */
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0 0.25rem env(safe-area-inset-bottom, 0px);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-right: none;
+    border-top: 1px solid var(--border-card);
+    z-index: 50;
+    background: var(--bg-sidebar);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+    gap: 0;
+  }
+
+  .sidebar .navbar-logo,
+  .sidebar-logout-wrapper,
+  .sidebar > div:last-child {
+    display: none !important;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    margin-top: 0;
+    gap: 0;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .sidebar-link {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.35rem 0.2rem;
+    font-size: 0.68rem;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sidebar-link svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-link span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  /* Page content padding */
+  .page-body-container {
+    padding: 1.5rem 1rem !important;
+  }
+
+  /* Home Navbar */
+  .home-nav-links {
+    display: none;
+  }
+
+  .navbar {
+    padding: 0.85rem 0;
+  }
+
+  .navbar-cta-group {
+    gap: 0.4rem;
+  }
+
+  .navbar-cta-group .btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  /* Home sections */
+  .hero-section {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .features-section,
+  .how-section,
+  .testimonials-section,
+  .cta-section {
+    padding: 2.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.55rem;
+  }
+
+  .features-grid,
   .testimonials-grid {
     grid-template-columns: 1fr !important;
   }
 
-  /* CTA box */
   .cta-box {
-    padding: 2.5rem 1.25rem !important;
+    padding: 2.25rem 1.25rem !important;
   }
 
-  /* Footer */
   .footer-inner {
     flex-direction: column;
     gap: 0.75rem;
     text-align: center;
   }
 
-  /* Container padding */
   .container {
     padding: 0 1rem;
   }
-}
 
-/* ─── Dashboard stat cards ─── */
-@media (max-width: 640px) {
-  /* Stack stat cards vertically */
-  .stats-row {
-    flex-direction: column !important;
-  }
-
-  /* Session list items */
-  .session-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.75rem !important;
-  }
-
-  .session-row > div {
-    width: 100% !important;
-    text-align: left !important;
-  }
-}
-
-/* ─── Report page grid ─── */
-@media (max-width: 720px) {
+  /* Report page grid */
   .report-grid {
     grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
   }
 
   .feedback-grid {
     grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
   }
-}
 
-/* ─── Interview room ─── */
-@media (max-width: 768px) {
+  /* Interview room on mobile */
   .interview-body {
     flex-direction: column;
   }
 
   .transcript-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
+    height: 52vh;
+    max-height: 52vh;
     border-left: none;
-    border-top: 1px solid var(--border-card);
-    max-height: 35vh;
+    border-top: 2px solid var(--border-card);
+    z-index: 60;
+    background: var(--bg-card);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 16px 16px 0 0;
   }
 
-  /* Pre-start: stack photo + info vertically */
+  .transcript-header {
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border-card);
+  }
+
+  .transcript-list {
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
   .interview-prestart {
     flex-direction: column;
     padding: 1.5rem 1rem;
@@ -1064,24 +1312,28 @@ select.form-input {
 
   .interview-prestart-photo {
     flex: none;
-    width: 180px;
-    height: 220px;
+    width: 170px;
+    height: 210px;
   }
 
   .interview-prestart-info h1 {
     font-size: 1.4rem;
   }
 
-  /* Controls: tighter gap on mobile */
+  .avatar-ring {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
   .interview-controls {
-    gap: 1.5rem;
-    padding: 1rem;
-    position: static;
+    gap: 1.25rem;
+    padding: 1rem 0.5rem;
     width: 100%;
   }
 
-  .interview-ctrl-btn span {
-    display: none; /* hide text labels, keep icons only on very small */
+  .interview-ctrl-btn {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.8rem;
   }
 
   .mic-btn {
@@ -1090,27 +1342,101 @@ select.form-input {
   }
 }
 
-@media (max-width: 480px) {
-  .interview-ctrl-btn span {
-    display: none;
+/* ─── Phone Specific (<= 640px) ─── */
+@media (max-width: 640px) {
+  .page-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .page-header-row .btn-header-action {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .session-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+    padding: 1rem !important;
+  }
+
+  .session-meta-group {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-card);
+    padding-top: 0.75rem;
+  }
+
+  .session-status {
+    text-align: left;
+  }
+
+  .setup-grid-2col,
+  .signup-grid-2col {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  .settings-theme-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .theme-toggle-group {
+    width: 100%;
+  }
+
+  .btn-theme-choice {
+    flex: 1;
+    text-align: center;
+  }
+
+  .settings-form-row {
+    flex-direction: column !important;
+    gap: 0.85rem !important;
   }
 }
 
-/* ─── Auth pages ─── */
+/* ─── Small Phone Breakpoint (<= 480px) ─── */
 @media (max-width: 480px) {
+  .header-username {
+    display: none;
+  }
+
+  .report-back-label {
+    display: none;
+  }
+
+  .stats-row,
+  .stats-row-4 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
   .auth-card {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1.15rem;
     border-radius: 12px;
+    width: 100%;
   }
 
   .auth-card-wide {
     max-width: 100%;
   }
-}
 
-/* ─── Settings: 2-col form → 1-col ─── */
-@media (max-width: 560px) {
-  .settings-form-row {
-    grid-template-columns: 1fr !important;
+  .interview-ctrl-btn span {
+    display: none;
+  }
+
+  .navbar-logo {
+    font-size: 0.95rem;
+  }
+
+  .btn-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 }

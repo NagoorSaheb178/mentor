@@ -100,27 +100,25 @@ export default function Home() {
           <header className="navbar">
             <div className="navbar-logo">
               <span className="navbar-logo-icon">▲</span>
-              Mentor AI
+              <span>Mentor AI</span>
             </div>
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <nav className="home-nav">
               {/* Nav links — hidden on mobile via .home-nav-links */}
-              <div className="home-nav-links" style={{ display: 'flex', gap: '1.75rem', fontSize: '0.875rem', fontWeight: 500 }}>
+              <div className="home-nav-links">
                 {[['#features', 'Features'], ['#how-it-works', 'How it works'], ['#testimonials', 'Reviews']].map(([href, label]) => (
                   <Link
                     key={href}
                     href={href}
-                    style={{ color: 'var(--text-secondary)', transition: 'color 0.15s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                    className="nav-anchor"
                   >
                     {label}
                   </Link>
                 ))}
               </div>
-              <div className="navbar-cta-group" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div className="navbar-cta-group">
                 <ThemeToggle />
-                <Link href="/login" className="btn btn-secondary">Log in</Link>
-                <Link href="/signup" className="btn btn-primary">Get started</Link>
+                <Link href="/login" className="btn btn-secondary btn-sm">Log in</Link>
+                <Link href="/signup" className="btn btn-primary btn-sm">Get started</Link>
               </div>
             </nav>
           </header>
@@ -131,12 +129,9 @@ export default function Home() {
       <section className="hero-section">
         <div className="container">
           {/* hero-grid: 2-col on desktop, 1-col on mobile */}
-          <div
-            className="hero-grid"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: '4rem', alignItems: 'center' }}
-          >
+          <div className="hero-grid">
             {/* Left: Copy */}
-            <div className="hero-copy" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="hero-copy" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.3rem 0.85rem', borderRadius: '999px',
@@ -173,11 +168,8 @@ export default function Home() {
             </div>
 
             {/* Right: Alex photo */}
-            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-              <div
-                className="hero-photo-card"
-                style={{ width: 380, borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border-card)', boxShadow: 'var(--shadow-lg)', background: 'var(--bg-card)' }}
-              >
+            <div className="hero-photo-wrapper" style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <div className="hero-photo-card">
                 <Image
                   src="/Alex.png"
                   alt="Alex — AI Interviewer"
@@ -186,7 +178,7 @@ export default function Home() {
                   style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', objectPosition: 'top center' }}
                   priority
                 />
-                <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid var(--border-card)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ padding: '0.85rem 1.15rem', borderTop: '1px solid var(--border-card)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Alex</div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Senior AI Interviewer</div>
@@ -216,7 +208,7 @@ export default function Home() {
       {/* ── Features ── */}
       <section id="features" className="features-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <div className="section-label">What you get</div>
             <h2 className="section-title" style={{ margin: '0 auto 0.75rem' }}>Everything you need to prepare</h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
@@ -224,7 +216,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          <div className="features-grid">
             {features.map(({ Icon, title, desc }) => (
               <div key={title} className="feature-card">
                 <div className="feature-icon"><Icon /></div>
@@ -239,7 +231,7 @@ export default function Home() {
       {/* ── How it works ── */}
       <section id="how-it-works" className="how-section">
         <div className="container">
-          <div className="how-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+          <div className="how-grid">
             <div>
               <div className="section-label">Process</div>
               <h2 className="section-title">Simple from day one</h2>
@@ -295,7 +287,7 @@ export default function Home() {
             <p className="section-subtitle" style={{ margin: '0 auto' }}>Real feedback from people who used Mentor AI before their interviews.</p>
           </div>
 
-          <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+          <div className="testimonials-grid">
             {testimonials.map((t) => (
               <div key={t.name} className="testimonial-card">
                 <div style={{ display: 'flex', gap: '3px', marginBottom: '1rem' }}>

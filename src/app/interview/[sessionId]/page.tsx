@@ -415,10 +415,21 @@ export default function VoiceInterviewPage({
         >
           <div className="transcript-header">
             <span>Live Transcript</span>
-            <span style={{ fontSize: '0.78rem', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <span className="status-dot" style={{ background: 'var(--accent-green)' }} />
-              Live
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <span className="status-dot" style={{ background: 'var(--accent-green)' }} />
+                Live
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowTranscript(false)}
+                className="btn-transcript-close"
+                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', padding: '0.2rem' }}
+                aria-label="Close transcript"
+              >
+                <IconX size={16} />
+              </button>
+            </div>
           </div>
           <div className="transcript-list">
             {transcript.length === 0 ? (

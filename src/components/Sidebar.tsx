@@ -89,7 +89,7 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+      <div className="sidebar-logout-wrapper" style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
         <button
           onClick={logout}
           className="sidebar-link"

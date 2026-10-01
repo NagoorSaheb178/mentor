@@ -70,33 +70,40 @@ export default function HistoryPage() {
           <Link href="/dashboard" className="btn-back">
             <span className="back-arrow">←</span> Dashboard
           </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
             <ThemeToggle />
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--accent-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, color: 'var(--accent-primary)' }}>
+            <Link href="/profile" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'var(--accent-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, color: 'var(--accent-primary)', fontSize: '0.9rem' }}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
-              <span style={{ fontWeight: 500, fontSize: '0.95rem' }}>{user.name}</span>
-            </div>
+              <span className="header-username" style={{ fontWeight: 500, fontSize: '0.9rem' }}>{user.name}</span>
+            </Link>
           </div>
         </header>
 
-        <div style={{ padding: '2.5rem', maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <h1 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>Interview History</h1>
-          <p style={{ marginBottom: '2rem', color: 'var(--text-secondary)' }}>View all your past interview sessions and their detailed reports.</p>
+        <div className="page-body-container">
+          <div className="page-header-row" style={{ marginBottom: '1.75rem' }}>
+            <div>
+              <h1 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 1.8rem)', marginBottom: '0.35rem' }}>Interview History</h1>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>View all your past interview sessions and their detailed reports.</p>
+            </div>
+            <Link href="/interview" className="btn btn-primary btn-header-action">
+              Practice Again
+            </Link>
+          </div>
           
-          <div className="card" style={{ padding: '2rem' }}>
+          <div className="card" style={{ padding: 'clamp(1rem, 3vw, 2rem)' }}>
             {sessionsLoading ? (
               <div className="text-center" style={{ padding: '3rem 0' }}>
                 <div className="loader" />
               </div>
             ) : sessions.length === 0 ? (
-              <div className="text-center" style={{ padding: '4rem 0', color: 'var(--text-muted)' }}>
-                <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem' }}>You haven't completed any interviews yet.</p>
+              <div className="text-center" style={{ padding: '4rem 1rem', color: 'var(--text-muted)' }}>
+                <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem' }}>You haven&apos;t completed any interviews yet.</p>
                 <Link href="/interview" className="btn btn-primary">Start your first interview</Link>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {sessions.map((session) => {
                   const typeInfo = INTERVIEW_TYPES[session.interviewType] || INTERVIEW_TYPES.behavioral;
                   const hasScore = session.feedback?.overallScore !== undefined;
@@ -105,66 +112,42 @@ export default function HistoryPage() {
                     <div
                       key={session.id}
                       className="session-row"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '1.25rem',
-                        border: '1px solid var(--border-card)',
-                        borderRadius: '12px',
-                        transition: 'transform 0.2s, box-shadow 0.2s',
-                        cursor: 'pointer'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
                       onClick={() => router.push(`/report/${session.id}`)}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', width: '50%' }}>
-                        <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--accent-secondary)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+                      <div className="session-main">
+                        <div className="session-icon">
                           {typeInfo.icon}
                         </div>
-                        <div>
-                          <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.2rem', fontSize: '1.1rem' }}>{typeInfo.label} Interview</div>
-                          <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                        <div className="session-info">
+                          <div className="session-title">{typeInfo.label} Interview</div>
+                          <div className="session-date">
                             {session.status === 'completed' && session.endedAt 
-                              ? `Completed on ${new Date(session.endedAt).toLocaleDateString()} at ${new Date(session.endedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`
-                              : `Started on ${new Date(session.startedAt).toLocaleDateString()} • Incomplete`}
+                              ? `Completed ${new Date(session.endedAt).toLocaleDateString()} at ${new Date(session.endedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`
+                              : `Started ${new Date(session.startedAt).toLocaleDateString()} • Incomplete`}
                           </div>
                         </div>
                       </div>
                       
-                      <div style={{ width: '20%', textAlign: 'center' }}>
-                        {session.status === 'completed' ? (
-                          <span className="badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--accent-green)' }}>Completed</span>
-                        ) : (
-                          <span className="badge">Incomplete</span>
-                        )}
-                      </div>
+                      <div className="session-meta-group">
+                        <div className="session-status">
+                          {hasScore ? (
+                            <div className="session-score" style={{ 
+                              color: session.feedback!.overallScore >= 80 ? 'var(--accent-green)' : session.feedback!.overallScore >= 60 ? 'var(--accent-amber)' : 'var(--accent-red)',
+                            }}>
+                              {session.feedback!.overallScore}%
+                            </div>
+                          ) : session.status === 'completed' ? (
+                            <span className="badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--accent-green)' }}>Completed</span>
+                          ) : (
+                            <span className="badge">Incomplete</span>
+                          )}
+                        </div>
 
-                      <div style={{ width: '20%', textAlign: 'center' }}>
-                        {hasScore ? (
-                          <div style={{ 
-                            color: session.feedback!.overallScore >= 80 ? 'var(--accent-green)' : session.feedback!.overallScore >= 60 ? 'var(--accent-amber)' : 'var(--accent-red)',
-                            fontWeight: 700,
-                            fontSize: '1.2rem'
-                          }}>
-                            {session.feedback!.overallScore}%
-                          </div>
-                        ) : (
-                          <span style={{ color: 'var(--text-muted)' }}>--</span>
-                        )}
-                      </div>
-
-                      <div style={{ width: '20%', textAlign: 'right' }}>
-                        <Link href={`/report/${session.id}`} className="btn btn-secondary btn-sm" onClick={(e) => e.stopPropagation()}>
-                          View Details
-                        </Link>
+                        <div className="session-action">
+                          <Link href={`/report/${session.id}`} className="btn btn-secondary btn-sm" onClick={(e) => e.stopPropagation()}>
+                            View Details
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   );
